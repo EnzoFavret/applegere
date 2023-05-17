@@ -6,7 +6,8 @@ if(isset($_POST['submit'])){
     $username = $_POST['user'];
     $password = $_POST['pass'];
 
-    $sql = "SELECT * FROM Users WHERE login = ? AND mdp = ?";
+    $sql = "SELECT * FROM Users WHERE login = '".hash("sha256", ?)."' AND mdp = '".hash("sha256", ?)."'";
+
     $params = array($username, $password);
     $stmt = sqlsrv_query($conn, $sql, $params);
 
