@@ -5,10 +5,10 @@ session_start();
 if(isset($_POST['submit'])){
     $username = $_POST['user'];
     $password = $_POST['pass'];
-
-    $sql = "SELECT * FROM Users WHERE login = '".hash("sha256", ?)."' AND mdp = '".hash("sha256", ?)."'";
-
-    $params = array($username, $password);
+    
+    $sql = "SELECT * FROM Users WHERE login = ? AND mdp = ?";
+    
+    $params = array(hash('sha256', $username), hash('sha256', $password));
     $stmt = sqlsrv_query($conn, $sql, $params);
 
     if ($stmt === false) {
